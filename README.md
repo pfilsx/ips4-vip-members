@@ -22,4 +22,8 @@ This adds a VIP promotions system to your [IPS Community Suite 4](http://invisio
 Application creates a every-day task for management VIP promotions. After installing app it will check ended promotions and delete them. So be sure that tasks works fine in your IPS4
 
 
-
+## Support
+You can support me and ips-vip-members app via:
+* [paypal](https://paypal.me/rootly)
+* [yandex](https://money.yandex.ru/to/410011792723779)
+* or any other way via contacting me by email pfilsx@gmail.com
