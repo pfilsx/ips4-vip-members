@@ -1,0 +1,16 @@
+{
+    "vipmembers": {
+        "addvip": {
+            "tab": "members",
+            "controller": "addvip",
+            "do": "",
+            "restriction": null
+        },
+		"vipcontrol": {
+            "tab": "members",
+            "controller": "vipcontrol",
+            "do": "",
+            "restriction": null
+        }
+    }
+}
