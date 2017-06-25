@@ -1,0 +1,43 @@
+[
+    {
+        "method": "addColumn",
+        "params": [
+            "vipmembers_promotions",
+            {
+                "name": "old_group_id",
+                "type": "BIGINT",
+                "length": 20,
+                "decimals": null,
+                "values": null,
+                "allow_null": false,
+                "default": null,
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            }
+        ]
+    },
+    {
+        "method": "changeColumn",
+        "params": [
+            "vipmembers_promotions",
+            "id",
+            {
+                "name": "promotion_id",
+                "type": "BIGINT",
+                "length": 20,
+                "decimals": null,
+                "values": null,
+                "allow_null": false,
+                "default": null,
+                "comment": "ID Number",
+                "unsigned": true,
+                "zerofill": false,
+                "auto_increment": true,
+                "binary": false
+            }
+        ]
+    }
+]

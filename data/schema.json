@@ -1,0 +1,87 @@
+{
+    "vipmembers_promotions": {
+        "name": "vipmembers_promotions",
+        "columns": {
+            "member_id": {
+                "name": "member_id",
+                "type": "BIGINT",
+                "length": 20,
+                "decimals": null,
+                "values": null,
+                "allow_null": false,
+                "default": null,
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            },
+            "promotion_ends": {
+                "name": "promotion_ends",
+                "type": "TIMESTAMP",
+                "length": null,
+                "decimals": null,
+                "values": null,
+                "allow_null": true,
+                "default": null,
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            },
+            "old_group_id": {
+                "name": "old_group_id",
+                "type": "BIGINT",
+                "length": 20,
+                "decimals": null,
+                "values": null,
+                "allow_null": false,
+                "default": null,
+                "comment": "",
+                "unsigned": false,
+                "zerofill": false,
+                "auto_increment": false,
+                "binary": false
+            },
+            "promotion_id": {
+                "name": "promotion_id",
+                "type": "BIGINT",
+                "length": 20,
+                "decimals": null,
+                "values": null,
+                "allow_null": false,
+                "default": null,
+                "comment": "ID Number",
+                "unsigned": true,
+                "zerofill": false,
+                "auto_increment": true,
+                "binary": false
+            }
+        },
+        "indexes": {
+            "PRIMARY": {
+                "type": "primary",
+                "name": "PRIMARY",
+                "columns": [
+                    "promotion_id"
+                ],
+                "length": [
+                    null
+                ]
+            },
+            "unq_vip_mem_id": {
+                "type": "unique",
+                "name": "unq_vip_mem_id",
+                "columns": [
+                    "member_id"
+                ],
+                "length": [
+                    null
+                ]
+            }
+        },
+        "comment": "",
+        "engine": "MyISAM"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "addvip": {
+        "addvip": {
+            "addvip_manage": "addvip_manage"
+        }
+    },
+    "vipmembers": {
+        "vipcontrol": {
+            "vipcontrol_manage": "vipcontrol_manage"
+        }
+    }
+}

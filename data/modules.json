@@ -1,0 +1,9 @@
+{
+    "admin": {
+        "vipmembers": {
+            "default_controller": "addvip",
+            "protected": false
+        }
+    },
+    "front": []
+}
