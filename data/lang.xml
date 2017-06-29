@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
- <app key="vipmembers" version="10001">
+ <app key="vipmembers" version="20001">
   <word key="__app_vipmembers" js="0">VIP Members</word>
   <word key="vipmembers_add" js="0">Добавить VIP пользователя</word>
   <word key="menu__vipmembers_vipmembers" js="0">VIP пользователи</word>
   <word key="menu__vipmembers_vipmembers_addvip" js="0">Добавить VIP</word>
   <word key="menu__vipmembers_vipmembers_vipcontrol" js="0">Управление VIP</word>
+  <word key="menu__vipmembers_vipmembers_settings" js="0">Настройки</word>
+  <word key="vipmembers_settings" js="0">Настройки</word>
   <word key="vipmembers_node" js="0">Управление VIP пользователями</word>
   <word key="vipmembers_member" js="0">Пользователь</word>
   <word key="vipmembers_group" js="0">VIP группа</word>
+  <word key="vipmembers_old_group" js="0">Оригинальная группа</word>
   <word key="vipmembers_time" js="0">Кол-во дней</word>
   <word key="vipmembers_infinity" js="0">Постоянно</word>
   <word key="vipmembers_never" js="0">Никогда</word>
@@ -21,5 +24,20 @@
   <word key="promotion_ends" js="0">VIP заканчивается</word>
   <word key="vipmembers_view" js="0">Просмотр</word>
   <word key="vipmembers_close" js="0">Закрыть</word>
+  <word key="vipmembers_notify_on_promote_block" js="0">Оповещения при продвижении в VIP</word>
+  <word key="vipmembers_send_notify_on_promote" js="0">Отправлять оповещение</word>
+  <word key="vipmembers_notify_on_promote" js="0">Текст оповещения</word>
+  <word key="vipmembers_notify_on_promote_permanent" js="0">Текст оповещения(для постоянного VIP)</word>
+  <word key="vipmembers_notify_on_downgrade_block" js="0">Оповещения при понижении из VIP</word>
+  <word key="vipmembers_send_notify_on_downgrade" js="0">Отправлять оповещение</word>
+  <word key="vipmembers_notify_on_downgrade" js="0">Текст оповещения</word>
+  <word key="vipmembers_notify_help" js="0"><![CDATA[Вы можете использовать <b>{name}</b> и <b>{ends}</b> в тексте
+    оповещения для подстановки значений имени пользователя и даты окончания VIP соответсвенно]]></word>
+  <word key="vipmembers_notify_permanent" js="0"><![CDATA[Вы можете использовать <b>{name}</b> в тексте
+    оповещения для подстановки имени пользователя]]></word>
+  <word key="vipmembers_general_settings" js="0">Основные настройки</word>
+  <word key="vipmembers_notify_user_id" js="0">Отправлять сообщения от</word>
+  <word key="vipmembers_notify_on_promote_title" js="0">Заглавие оповещения</word>
+  <word key="vipmembers_notify_on_downgrade_title" js="0">Заглавие оповещения</word>
  </app>
 </language>

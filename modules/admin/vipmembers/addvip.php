@@ -76,18 +76,16 @@ class _addvip extends \IPS\Dispatcher\Controller
                     $promotion = new VMember();
                     $promotion->member_id = $member->member_id;
                     $promotion->old_group_id = $member->member_group_id;
+                    $promotion->vip_group_id = $values['vipmembers_group'];
                     $promotion->promotion_ends = $values['vipmembers_time'] == 0
                         ? null
                         : date('Y-m-d', (strtotime(date('d.m.Y')) + $values['vipmembers_time']*24*60*60));
                     $promotion->save();
-                    $member->member_group_id = $values['vipmembers_group'];
-                    $member->save();
-
-                    $form->addMessage('vipmembers_add_success', 'ipsMessage ipsMessage_success');
+                    $url = \IPS\Http\Url::internal( "app=vipmembers&module=vipmembers&controller=addvip&fromPromote=true" );
+                    \IPS\Output::i()->redirect( $url, 'completed');
                 }
             }
         }
-
         Output::i()->output = $form;
 	}
 

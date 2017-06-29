@@ -6,9 +6,15 @@
             "do": "",
             "restriction": null
         },
-		"vipcontrol": {
+        "vipcontrol": {
             "tab": "members",
             "controller": "vipcontrol",
+            "do": "",
+            "restriction": null
+        },
+        "settings": {
+            "tab": "members",
+            "controller": "settings",
             "do": "",
             "restriction": null
         }

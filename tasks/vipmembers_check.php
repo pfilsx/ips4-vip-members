@@ -37,11 +37,11 @@ class _vipmembers_check extends \IPS\Task
 	 */
 	public function execute()
 	{
-	    foreach (\IPS\Db::i()->select(\IPS\vipmembers\VMember::$databaseColumnId, \IPS\vipmembers\VMember::$databaseTable, 'promotion_ends < CURRENT_TIMESTAMP', null) as $key => $id){
+	    foreach (\IPS\Db::i()->select(\IPS\vipmembers\VMember::$databaseColumnId, \IPS\vipmembers\VMember::$databaseTable,
+            'promotion_ends is not null and promotion_ends < CURRENT_TIMESTAMP', null) as $key => $id){
             $promotion = \IPS\vipmembers\VMember::load($id);
             $promotion->delete();
         }
-        //TODO оповещения об окончании VIP
 		return NULL;
 	}
 	
