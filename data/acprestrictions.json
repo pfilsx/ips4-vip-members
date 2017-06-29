@@ -7,6 +7,9 @@
     "vipmembers": {
         "vipcontrol": {
             "vipcontrol_manage": "vipcontrol_manage"
+        },
+        "settings": {
+            "settings_manage": "settings_manage"
         }
     }
 }

@@ -1,38 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <theme name="Default" author_name="Invision Power Services, Inc" author_url="http://www.invisionpower.com">
- <template template_group="vmember" template_name="view" template_data="$node, $member, $group" template_app="vipmembers" template_location="admin"><![CDATA[<form class="ipsForm_horizontal">
-    <ul class="ipsForm">
-        <li class="ipsFieldRow ipsPad_half  ipsClearfix">
-            <div class="ipsFieldRow_title ">{lang="vipmembers_member"}</div>
-            <div class="ipsFieldRow_content  ipsClearfix">
-                <input type="text" class="ipsField" value="{$member->real_name}" disabled />
+ <template template_group="vmember" template_name="view" template_data="$node, $member, $vipGroup, $group" template_app="vipmembers" template_location="admin"><![CDATA[    <ul class="ipsForm ipsForm_horizontal">
+        <!--        <li class="ipsFieldRow ipsPad_half  ipsClearfix">-->
+        <!--            <div class="ipsFieldRow_title ">{lang="vipmembers_member"}</div>-->
+        <!--            <div class="ipsFieldRow_content  ipsClearfix">-->
+        <!--                <input type="text" class="ipsField" value="{$member->real_name}" disabled />-->
+        <!--            </div>-->
+        <!---->
+        <!--        </li>-->
+        <!--        <li class="ipsFieldRow ipsPad_half  ipsClearfix">-->
+        <!--            <div class="ipsFieldRow_title ">{lang="vipmembers_group"}</div>-->
+        <!--            <div class="ipsFieldRow_content  ipsClearfix">-->
+        <!--                <select class="ipsField" disabled>-->
+        <!--                    <option selected>{$vipGroup->prefix|raw}{$vipGroup->name}{$vipGroup->suffix|raw}</option>-->
+        <!--                </select>-->
+        <!--            </div>-->
+        <!--        </li>-->
+        <!--        <li class="ipsFieldRow ipsPad_half  ipsClearfix">-->
+        <!--            <div class="ipsFieldRow_title ">{lang="vipmembers_old_group"}</div>-->
+        <!--            <div class="ipsFieldRow_content  ipsClearfix">-->
+        <!--                <select class="ipsField" disabled>-->
+        <!--                    <option selected>{$group->name}</option>-->
+        <!--                </select>-->
+        <!--            </div>-->
+        <!--        </li>-->
+
+        <!--        <li class="ipsFieldRow ipsPad_half  ipsClearfix">-->
+        <!--            <div class="ipsFieldRow_title ">{lang="promotion_ends"}</div>-->
+        <!--            <div class="ipsFieldRow_content  ipsClearfix">-->
+        <!--                {{if ($node->promotion_ends != null)}}-->
+        <!--                    <input type="text" class="ipsField" value="{$exprDate = explode(' ', $node->promotion_ends)[0]}" disabled />-->
+        <!--                {{else}}-->
+        <!--                    <input type="text" class="ipsField" value="{lang="vipmembers_never"}" disabled />-->
+        <!--                {{endif}}-->
+        <!--            </div>-->
+        <!--        </li>-->
+        <li class="ipsFieldRow ipsClearfix">
+            <div class="ipsFieldRow_title">
+                {lang="vipmembers_member"}:
+            </div>
+            <div class="ipsFieldRow_label">
+                {$vipGroup->prefix|raw}{$member->real_name}{$vipGroup->suffix|raw}
+            </div>
+        </li>
+
+        <li class="ipsFieldRow ipsClearfix">
+            <div class="ipsFieldRow_title">
+                {lang="vipmembers_group"}
+            </div>
+            <div class="ipsFieldRow_label">
+                {$vipGroup->prefix|raw}{$vipGroup->name}{$vipGroup->suffix|raw}
+            </div>
+        </li>
+
+        <li class="ipsFieldRow ipsClearfix">
+            <div class="ipsFieldRow_title">
+                {lang="vipmembers_old_group"}
+            </div>
+            <div class="ipsFieldRow_label">
+                {$group->prefix|raw}{$group->name}{$group->suffix|raw}
             </div>
 
         </li>
-        <li class="ipsFieldRow ipsPad_half  ipsClearfix">
-            <div class="ipsFieldRow_title ">{lang="vipmembers_group"}</div>
-            <div class="ipsFieldRow_content  ipsClearfix">
-                <select class="ipsField" disabled>
-                    <option selected>{$group->name}</option>
-                </select>
+        <li class="ipsFieldRow ipsClearfix">
+            <div class="ipsFieldRow_title">
+                {lang="promotion_ends"}
             </div>
-        </li>
-        <li class="ipsFieldRow ipsPad_half  ipsClearfix">
-            <div class="ipsFieldRow_title ">{lang="promotion_ends"}</div>
-            <div class="ipsFieldRow_content  ipsClearfix">
+            <div class="ipsFieldRow_label">
                 {{if ($node->promotion_ends != null)}}
-                    <input type="text" class="ipsField" value="{$exprDate = explode(' ', $node->promotion_ends)[0]}" disabled />
+                    {$exprDate = explode(' ', $node->promotion_ends)[0]}
                 {{else}}
-                    <input type="text" class="ipsField" value="{lang="vipmembers_never"}" disabled />
+                    {lang="vipmembers_never"}
                 {{endif}}
             </div>
         </li>
+
     </ul>
-    <br><br>
+    <br>
     <div class="ipsAreaBackground_light ipsClearfix ipsPad ipsType_center">
         <a href="#" class="ipsButton ipsButton_primary" data-action="dialogClose">{lang="vipmembers_close"}</a>
     </div>
-</form>
 
 
 ]]></template>

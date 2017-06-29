@@ -9,6 +9,10 @@ use \IPS\Http\Url;
 use \IPS\DateTime;
 use \IPS\Theme;
 use \IPS\Output;
+use \IPS\Settings;
+use \IPS\core\Messenger\Conversation;
+use \IPS\core\Messenger\Message;
+use \IPS\Dispatcher;
 
 
 /* To prevent PHP errors (extending class does not exist) revealing path */
@@ -111,13 +115,24 @@ class _VMember extends \IPS\Node\Model
     public function view(){
         try {
             $member = Member::load($this->member_id);
-            $group = Group::load($member->member_group_id);
-            $form = Theme::i()->getTemplate( 'vmember', 'vipmembers', 'admin' )->view($this, $member, $group);
+            $vipGroup = Group::load($this->vip_group_id);
+            $group = Group::load($this->old_group_id);
+            $form = Theme::i()->getTemplate( 'vmember', 'vipmembers', 'admin' )->view($this, $member, $vipGroup, $group);
             Output::i()->output = $form;
         }
          catch (\Exception $ex){
-             Output::i()->output = $ex->getMessage();
+             Output::i()->output = $ex->getTraceAsString();
          }
+    }
+
+    public function save(){
+        $member = Member::load($this->member_id);
+        $member->member_group_id = $this->vip_group_id;
+        $member->save();
+        parent::save();
+        if (Settings::i()->vipmembers_send_notify_on_promote){
+            $this->notifyPromote();
+        }
     }
 
     public function delete(){
@@ -125,9 +140,74 @@ class _VMember extends \IPS\Node\Model
         $primaryGroupId = $this->old_group_id;
         $member->member_group_id = $primaryGroupId;
         $member->save();
-        //TODO сообщение об отключении VIP
         parent::delete();
+        if (Settings::i()->vipmembers_send_notify_on_downgrade){
+            $this->notifyDowngrade();
+        }
     }
 
+    protected function notifyPromote(){
+        $notifyTitle = Settings::i()->vipmembers_notify_on_promote_title;
+        $notifyContent = $this->prepareNotifyContent($this->promotion_ends ?
+            Settings::i()->vipmembers_notify_on_promote : Settings::i()->vipmembers_notify_on_promote_permanent);
+        $notifySender = Member::load(Settings::i()->vipmembers_notify_user_id);
+        $this->sendNotification($notifySender, $notifyTitle, $notifyContent);
+    }
 
+    protected function notifyDowngrade(){
+        $notifyTitle = Settings::i()->vipmembers_notify_on_downgrade_title;
+        $notifyContent = $this->prepareNotifyContent(Settings::i()->vipmembers_notify_on_downgrade);
+        $notifySender = Member::load(Settings::i()->vipmembers_notify_user_id);
+        $this->sendNotification($notifySender, $notifyTitle, $notifyContent);
+    }
+
+    protected function sendNotification($notifySender, $notifyTitle, $notifyContent){
+        if (empty($notifySender) || empty($notifyTitle) || empty($notifyContent)){
+            return;
+        }
+        /* Need to trick \IPS\core\Messenger\Message into thinking we're on the front side, due to checking module permissions */
+        $controllerLocation = Dispatcher::i()->controllerLocation;
+        Dispatcher::i()->controllerLocation = 'front';
+        try
+        {
+            /* Create conversation */
+            $conversation = Conversation::createItem($notifySender, $notifySender->ip_address, \IPS\DateTime::ts(time()));
+            $conversation->title = $notifyTitle;
+            $conversation->is_system = TRUE;
+            $conversation->save();
+
+            /* Add message */
+            $message = Message::create($conversation, $notifyContent, TRUE, NULL, FALSE, $notifySender);
+            $conversation->first_msg_id = $message->id;
+
+            $conversation->authorize(Member::load($this->member_id));
+            $conversation->save();
+            $message->sendNotifications();
+        }
+        catch( \Exception $e )
+        {
+            // This needs to send notifications about new message to user
+        }
+        Dispatcher::i()->controllerLocation = $controllerLocation;
+    }
+
+    protected function prepareNotifyContent($template){
+
+        if (!$this->member_id || !$this->promotion_ends) {
+            return $template;
+        }
+        $member = Member::load($this->member_id);
+        $promotionEnds = explode(' ',$this->promotion_ends)[0];
+        $patterns = array(
+            '{name}',
+            '{ends}'
+        );
+        $replaces = array(
+            $member->real_name,
+            $promotionEnds
+        );
+
+        $result = str_replace($patterns, $replaces, $template);
+        return $result;
+    }
 }
